@@ -7,7 +7,7 @@
 </head>
 <body>
 
-
+  <!-- use data attributes to hook up the key with the audio. when someone hits a key on their keyboard, we find the audio element and play it, and we also find the div and add a class "playing" -->
   <div class="keys">
     <div data-key="65" class="key">
       <kbd>A</kbd>
@@ -58,6 +58,39 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+
+  // playsound function
+
+  function playSound(e) {
+    // Store the audio element of keydown in a variable.
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    // select the key element in the dom
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+
+    // stop the function if keydown has no audio element
+    if(!audio) return;
+    // rewind to start so that you can keep pressing key
+    audio.currentTime = 0;
+    // play audio
+    audio.play();
+    // add class 'playing' when you hit the key
+    key.classList.add('playing');
+  }
+
+  // function to remove the playing class when the transition has finished
+  function removeTransition(e) {
+    if(e.propertyName !== 'transform') return;
+    this.classList.remove('playing');
+  }
+
+  // variable for all divs with class 'key'
+  const keys = document.querySelectorAll('.key');
+
+  // for each key, run the removeTransition function when the transition has ended
+  keys.forEach( key => key.addEventListener('transitionend', removeTransition));
+
+  // add event listener: when someone keys down, play the sound 
+  window.addEventListener('keydown', playSound );
 
 </script>
 
