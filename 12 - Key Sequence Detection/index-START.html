@@ -7,6 +7,20 @@
 </head>
 <body>
 <script>
+
+  const pressed = [];
+  const secretCode = 'wesbos';
+
+  window.addEventListener('keyup', (e) => {
+    console.log(e.key);
+    pressed.push(e.key);
+    pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);  // max # chars in array should be equal to # chars in secret code. trim the array accordingly. (-) sign starts at back of array. beginning at last array element, splice any element(s) from the back (aka first element) that cause the array to exceed the length of secret code.
+    if (pressed.join('').includes(secretCode)) {
+      console.log('yes');
+    }
+    console.log(pressed);
+  });
+
 </script>
 </body>
 </html>
