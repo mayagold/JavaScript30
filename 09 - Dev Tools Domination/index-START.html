@@ -17,29 +17,58 @@
       p.style.fontSize = '50px';
     }
 
+    // break on... attribute modifications - takes you through the functionality line by line of an element you inspect in the dom
+
     // Regular
+    console.log('hello');
 
     // Interpolated
+    console.log('Hello I am a %s string!', 'dk');
 
     // Styled
+    console.log('%cI am some great text', 'font-size: 50px');
 
     // warning!
+    console.warn('oh no');
 
     // Error :|
+    console.error('shit');
 
     // Info
+    console.info('crocodiles eat 3-4 people per year');
 
     // Testing
+    console.assert(1===2, 'that is wrong');
 
     // clearing
+    console.clear();
 
     // Viewing DOM Elements
+    console.dir(dogs);
 
-    // Grouping together
-
+    // Grouping together !!!!!!!!!!!!!!!!
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`this is ${dog.name}`);
+      console.groupEnd(`${dog.name}`);
+    })
     // counting
-
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Wes');
     // timing
+    console.time('fetching data');
+    fetch('https://api.github.com/users/wesbos')
+      .then(data=>data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+        console.log(data)
+      });
+
+    // tables
+    console.table(dogs);
 
   </script>
 </body>
